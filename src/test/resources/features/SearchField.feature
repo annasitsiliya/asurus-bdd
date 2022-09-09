@@ -1,30 +1,24 @@
-Feature: Test scenario for Git
+Feature: Test scenarios for Amazon search field
 
-  Scenario: Verify search field
+  Scenario: User sees no results message for incorrect input
 
-#  In the first test you should verify if you write incorrect information
-#  you should check that at result you have No results for “incorrect information”
+    Given User is on Amazon home page
+    When User searches for "456546765876988708"
+    Then User sees no results message for "456546765876988708"
 
-   Given "Home Page {string}"
 
-    When
+  Scenario: Search term is present in search summary string
 
-#   When Result Incorrect Input {string}
+    Given User is on Amazon home page
+    When User searches for "laptop"
+    Then User sees result summary string with "laptop"
 
-    Then User is successfully navigated to the "https://github.com/"
-#    And User info "juliaHrabovska" on "Home Page" is present on navigation panel
+  Scenario: At least one found element contains search term
 
-#  Scenario Outline: Login to GitHub (negative)
+    Given User is on Amazon home page
+    When User searches for "iphone"
+    Then Search result items contain "iphone"
 
-#    Given User is on "Login Page"
 
-#    When User enters username as "<username>" and password as "<password>" on "Login Page"
-
-#    Then User gets error message "Incorrect username or password." on "Login Page"
-
-#    Examples:
-#      | username       | password |
-#      | juliaHrabovska | qwerty   |
-#      | qwerty         | qwerty   |
 
 
