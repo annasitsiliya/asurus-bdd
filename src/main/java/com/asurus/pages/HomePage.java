@@ -1,0 +1,39 @@
+package com.asurus.pages;
+
+import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.Selenide;
+import com.codeborne.selenide.SelenideElement;
+import org.openqa.selenium.By;
+
+import static com.codeborne.selenide.Selenide.$;
+
+public class HomePage {
+
+    public HomePage open() {
+        Selenide.open("/");
+        return this;
+    }
+
+    public String getDeliverLocation(String city) {
+        SelenideElement deliverToElement = $(By.id("glow-ingress-line2")).shouldHave(Condition.text(city));
+        return deliverToElement.text();
+    }
+
+    public SearchResultsPage chooseCategory(String category) {
+        SelenideElement chooseChairs = $(By.xpath("//img[@alt=\"" + category + "\"]")).shouldBe(Condition.visible);
+        chooseChairs.click();
+        return new SearchResultsPage();
+    }
+
+    public SearchResultsPage inputTextAndClickSearchButton(String searchText) {
+
+        SelenideElement searchInputField = $(By.cssSelector(".nav-search-field input")).shouldBe(Condition.visible);
+        searchInputField.sendKeys(searchText);
+
+        SelenideElement searchButton = $(By.xpath("//input[@id=\"nav-search-submit-button\"]")).shouldBe(Condition.visible);
+        searchButton.click();
+
+        return new SearchResultsPage();
+    }
+
+}
